@@ -1,0 +1,90 @@
+# SERVOS
+# LEFT = servo 0
+# RIGHT = servo 1
+# MIDDLE= servo 2
+
+# Sequence 0
+start:
+ # back up and turn left if the right sensor sees an object
+  #right_sensor if backward goto start endif
+forward
+#leftward
+goto start
+
+# returns true if the right sensor sees an object
+sub right_sensor
+ 4 get_position 600 greater_than  return
+ return
+
+# forward
+sub forward
+ 6096 2 servo # middle, left down
+ 500 delay
+ 6496 0 servo # left fwd   
+ 6496 1 servo #right bwd
+ 1000 delay
+
+ 5296 2 servo # middle, right down
+ 500 delay
+ 4896 0 servo # left bwd   
+ 4896 1 servo #right fwd
+ 1000 delay  
+return
+
+# back
+sub backward
+ 6096 2 servo # middle, left down
+ 500 delay
+ 4896 0 servo # left bwd   
+ 4896 1 servo #right fwd
+
+ 1000 delay
+
+ 5296 2 servo # middle, right down
+ 500 delay
+ 6496 0 servo # left fwd   
+ 6496 1 servo #right bwd
+ 1000 delay  
+return
+
+# right
+sub rightward
+ 6096 2 servo # middle, left down
+ 500 delay
+ 6496  0 servo # left fwd
+ 4896 1 servo #right fwd
+ 
+ 1000 delay
+
+ 5296 2 servo # middle, right down
+ 500 delay
+ 4896 0 servo # left bwd   
+ 6496 1 servo #right bwd
+ 1000 delay  
+return
+
+# left
+sub leftward
+ 5296 2 servo # middle, right down
+ 500 delay
+ 6496 0 servo # left fwd
+ 4896 1 servo #right fwd
+   
+ 1000 delay
+ 
+ 6096 2 servo # middle, left down
+ 500 delay
+ 4896 0 servo # left bwd   
+ 6496 1 servo #right bwd
+ 1000 delay  
+return
+
+
+sub moving_wait
+  begin
+    get_moving_state
+  while
+    # wait until it is no longer moving
+  repeat
+return
+
