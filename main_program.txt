@@ -3,13 +3,27 @@
 # RIGHT = servo 1
 # MIDDLE= servo 2
 
-# Sequence 0
+
+
+# Main
 start:
+# Start by setting the legs to middle position for 3 seconds
+5696 0 servo    
+5696 1 servo
+5696 2 servo 
+moving_wait
+3000 delay
+
+loop:
  # back up and turn left if the right sensor sees an object
   #right_sensor if backward goto start endif
+
 forward
 #leftward
-goto start
+goto loop
+
+###############################################
+###############################################
 
 # returns true if the right sensor sees an object
 sub right_sensor
@@ -18,64 +32,73 @@ sub right_sensor
 
 # forward
 sub forward
- 6800 2 servo # middle, left down
+ 6096 2 servo # middle, left down
  500 delay
- 7000 0 servo # left fwd   
- 7000 1 servo #right bwd
+ 6496 0 servo # left fwd   
+ 6496 1 servo #right bwd
  1000 delay
 
- 5200 2 servo # middle, right down
+ 5296 2 servo # middle, right down
  500 delay
- 5000 0 servo # left bwd   
- 5000 1 servo #right fwd
+ 4896 0 servo # left bwd   
+ 4896 1 servo #right fwd
  1000 delay  
 return
 
 # back
 sub backward
- 6800 2 servo # middle, left down
+ 6096 2 servo # middle, left down
  500 delay
- 5000 0 servo # left bwd   
- 5000 1 servo #right fwd
+ 4896 0 servo # left bwd   
+ 4896 1 servo #right fwd
 
  1000 delay
 
- 5200 2 servo # middle, right down
+ 5296 2 servo # middle, right down
  500 delay
- 7000 0 servo # left fwd   
- 7000 1 servo #right bwd
+ 6496 0 servo # left fwd   
+ 6496 1 servo #right bwd
  1000 delay  
 return
 
 # right
 sub rightward
- 6800 2 servo # middle, left down
+ 6096 2 servo # middle, left down
  500 delay
- 7000  0 servo # left fwd
- 5000 1 servo #right fwd
+ 6496  0 servo # left fwd
+ 4896 1 servo #right fwd
  
  1000 delay
 
- 5200 2 servo # middle, right down
+ 5296 2 servo # middle, right down
  500 delay
- 5000 0 servo # left bwd   
- 7000 1 servo #right bwd
+ 4896 0 servo # left bwd   
+ 6496 1 servo #right bwd
  1000 delay  
 return
 
 # left
 sub leftward
- 5200 2 servo # middle, right down
+ 5296 2 servo # middle, right down
  500 delay
- 7000 0 servo # left fwd
- 5000 1 servo #right fwd
+ 6496 0 servo # left fwd
+ 4896 1 servo #right fwd
    
  1000 delay
  
- 6800 2 servo # middle, left down
+ 6096 2 servo # middle, left down
  500 delay
- 5000 0 servo # left bwd   
- 7000 1 servo #right bwd
+ 4896 0 servo # left bwd   
+ 6496 1 servo #right bwd
  1000 delay  
+return
+
+
+sub moving_wait
+  begin
+    get_moving_state
+  while
+    # wait until it is no longer moving
+  repeat
 return
 
