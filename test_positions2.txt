@@ -19,13 +19,13 @@ moving_wait
 loop:
   # back up if both sensors see an object
   left_sensor right_sensor logical_and
-  if backward backward backward goto start endif
+  if backward moving_wait backward moving_wait backward moving_wait goto start endif
  
   # back up and turn right if the left sensor sees an object
-  left_sensor if backward rightward rightward rightward goto start endif
+  left_sensor if backward moving_wait  backward moving_wait rightward moving_wait rightward moving_wait rightward moving_wait goto start endif
  
   # back up and turn left if the right sensor sees an object
-  right_sensor if backward leftward leftward leftward goto start endif
+  right_sensor if backward moving_wait  backward moving_wait leftward moving_wait leftward moving_wait leftward moving_wait goto start endif
  
   # otherwise, if there is nothing ahead, walk forward
   forward
@@ -36,13 +36,13 @@ loop:
 
 # returns true if the left sensor sees an object
 sub left_sensor
- 3 get_position 400 greater_than  return
+ 3 get_position 30 greater_than  return
 return
 
 
 # returns true if the right sensor sees an object
 sub right_sensor
- 4 get_position 400 greater_than  return
+ 4 get_position 30 greater_than  return
 return
 
 # forward
