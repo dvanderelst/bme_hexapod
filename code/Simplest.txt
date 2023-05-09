@@ -1,0 +1,51 @@
+
+# SERVOS
+# LEFT = servo 0
+# RIGHT = servo 1
+# MIDDLE= servo 2
+# LEFT SENSOR = servo 3
+# right SENSOR = servo 4
+
+# Main
+start:
+# Start by setting the legs to middle position for 3 seconds
+5600 0 servo  #LEft  
+6000 1 servo #RIGHT
+5362 2 servo  #MIDDLE
+5000 delay
+
+loop:
+	forward
+goto loop
+
+###############################################
+###############################################
+
+# forward
+sub forward
+	4400 2 servo # middle, left up
+	moving_wait
+	500 delay
+	4800 0 servo # left fwd   
+	5200 1 servo #right bwd
+	moving_wait
+	1000 delay
+	
+	6324 2 servo # middle, right up	
+	moving_wait
+	500 delay
+	6400 0 servo # left bwd   
+	6800 1 servo #right fwd
+	moving_wait
+	1000 delay  
+return
+
+
+sub moving_wait
+  begin
+    get_moving_state
+  while
+    # wait until it is no longer moving
+  repeat
+return
+
